@@ -18,10 +18,10 @@ class FieldDetectionServiceTest {
 
         List<FieldDescription> fields = fieldDetectionService.detectFields(ocr);
 
-        assertEquals(4, fields.size());
-        assertEquals("Nom", fields.get(1).getName());
-        assertEquals("email", fields.get(2).getType());
-        assertTrue(fields.get(2).isRequired());
-        assertEquals("date", fields.get(3).getType());
+        assertEquals(3, fields.size());
+        assertEquals("Nom", fields.get(0).getName());
+        assertEquals("email", fields.get(1).getType());
+        assertTrue(fields.get(1).isRequired());
+        assertEquals("date", fields.get(2).getType());
     }
 }

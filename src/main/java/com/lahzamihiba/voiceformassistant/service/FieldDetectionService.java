@@ -22,6 +22,7 @@ public class FieldDetectionService {
 
         String[] lines = ocrText.split("\\R");
         int order = 1;
+        boolean firstMeaningfulLineHandled = false;
 
         for (String rawLine : lines) {
             String line = rawLine == null ? "" : rawLine.trim();
@@ -30,6 +31,12 @@ public class FieldDetectionService {
             }
 
             String lowered = line.toLowerCase(Locale.ROOT);
+            if (!firstMeaningfulLineHandled) {
+                firstMeaningfulLineHandled = true;
+                if (isLikelyFormTitle(lowered)) {
+                    continue;
+                }
+            }
             if (isNonFieldLine(lowered)) {
                 continue;
             }
@@ -55,6 +62,16 @@ public class FieldDetectionService {
                 || lowered.contains("annuler")
                 || lowered.contains("reset")
                 || lowered.length() < 2;
+    }
+
+    private boolean isLikelyFormTitle(String lowered) {
+        return containsAny(lowered,
+                "création de compte",
+                "creation de compte",
+                "inscription",
+                "register",
+                "sign up",
+                "formulaire");
     }
 
     private String normalizeFieldName(String line) {

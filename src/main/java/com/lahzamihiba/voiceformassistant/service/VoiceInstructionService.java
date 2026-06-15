@@ -2,16 +2,12 @@ package com.lahzamihiba.voiceformassistant.service;
 
 import com.lahzamihiba.voiceformassistant.entity.FieldDescription;
 import com.lahzamihiba.voiceformassistant.entity.VoiceInstruction;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class VoiceInstructionService {
-
-    @Value("${app.voice.integration.target:WEB_SPEECH_API}")
-    private String speechTarget;
 
     public List<VoiceInstruction> generateInstructions(List<FieldDescription> fields) {
         return fields.stream()
@@ -40,7 +36,7 @@ public class VoiceInstructionService {
                 .order(field.getOrder())
                 .field(field.getName())
                 .type(field.getType())
-                .speech(speech + " (Compatible " + speechTarget + ")")
+                .speech(speech)
                 .build();
     }
 
