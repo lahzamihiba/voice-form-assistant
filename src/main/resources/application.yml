@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: voice-form-assistant
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+app:
+  ocr:
+    tesseract:
+      datapath: ""
+      language: fra+eng
+  voice:
+    integration:
+      target: WEB_SPEECH_API
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
